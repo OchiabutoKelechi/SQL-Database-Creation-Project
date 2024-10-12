@@ -592,3 +592,7 @@ Set TotalSales = TransactionQuantity * UnitPrice
 Where ID Between 520 And 1046
 ```
 
+```sql
+-- Final Outcome of the Table
+Select ID, ProductCategory, TransactionDate, TransactionQuantity, ProductID, ProductType, UnitPrice, TransactionTime, LocationName, LocationID, MonthName, DayName, TotalSales from Sales
+```
