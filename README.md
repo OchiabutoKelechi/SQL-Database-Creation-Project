@@ -467,8 +467,13 @@ Set TotalSales = TransactionQuantity * UnitPrice
 ```
 
 ```sql
---- I ADDED EXTRA 318 ROWS TO THE TABLE, HENCE, I'M BEGINNING TO UPDATE THE NEWLY ADDED ROWS
+-- Updating the table by correcting a misspelling in one of the ProductTypes
+Update Sales
+Set ProductType = 'Pastry'
+where ProductType in ('Pastery', 'Patry', 'Patery')
 ```
+
+### I ADDED EXTRA 318 ROWS TO THE TABLE, HENCE, I'M BEGINNING TO UPDATE THE NEWLY ADDED ROWS
 
 ```sql
 -- Updating the PRODUCTID column using 'WHERE, AND, and BETWEEN' conditions 
@@ -649,9 +654,21 @@ Where ID Between 520 And 1046
 ```
 
 ```sql
+-- Extracting the TIMEOFDAY from the TransactionTime column
+Update Sales
+Set TimeOfDay = Case
+		When Datepart(Hour,TransactionTime) < 12  then 'Morning'
+		When DatePart(Hour, TransactionTime) < 16 then 'Afternoon'
+		Else 'Evening'
+		End as TIMEOFDAYY
+```
+
+```sql
 -- Final Outcome of the Table
 Select ID, ProductCategory, TransactionDate, TransactionQuantity, ProductID, ProductType, UnitPrice, TransactionTime, LocationName, LocationID, MonthName, DayName, TotalSales, TimeofDay from Sales
 ```
+
+## Data Analysis
 
 ```sql
 -- Calculating Total Sales
@@ -701,16 +718,6 @@ Add TimeofDay varchar (20)
 ```
 
 ```sql
--- Extracting the TIMEOFDAY from the TransactionTime column
-Update Sales
-Set TimeOfDay = Case
-		When Datepart(Hour,TransactionTime) < 12  then 'Morning'
-		When DatePart(Hour, TransactionTime) < 16 then 'Afternoon'
-		Else 'Evening'
-		End as TIMEOFDAYY
-```
-
-```sql
 --Calculating number of LocationNames LocationName
 Select count (distinct LocationName) as	LocationName from Sales
 ```
@@ -721,17 +728,17 @@ Select distinct LocationName as LocationName from Sales
 ```
 
 ```sql
---Calculating number of MonthName ProductType
+--Calculating the number of MonthName ProductType
 Select count (distinct MonthName) as MonthName from Sales
 ```
 
 ```sql
 --Checking for the Names of Distinct MonthNames
-Select distinct MonthName as MonthName from Sales
+Select distinct MonthName as MonthName from the Sales
 ```
 
 ```sql
---Calculating number of Distinct DayName ProductType
+--Calculating the number of Distinct DayName ProductType
 Select count (distinct DayName) as DayName from Sales
 ```
 
@@ -851,7 +858,7 @@ Order by TransactionQuantity desc
 ```
 
 ```sql
--- Counting TransactionQuantity by	DayName
+-- Counting TransactionQuantity by DayName
 Select DayName, Sum(TransactionQuantity) TransactionQuantity from Sales
 Group by DayName
 Order by TransactionQuantity desc
@@ -866,6 +873,3 @@ Order by TransactionQuantity desc
 
 ## Conclusion
 This project highlights a comprehensive understanding of SQL for database management, data manipulation, and sales analysis. By creating a robust sales table and utilizing advanced SQL queries such as CASE, GROUP BY, ORDER BY, RANK, and SUM, meaningful insights were extracted from the data, providing actionable recommendations for improving business operations.
-
-
-
