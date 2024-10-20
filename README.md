@@ -473,7 +473,8 @@ Set ProductType = 'Pastry'
 where ProductType in ('Pastery', 'Patry', 'Patery')
 ```
 
-###### I ADDED EXTRA 318 ROWS TO THE TABLE, HENCE, I'M BEGINNING TO UPDATE THE NEWLY ADDED ROWS
+##### I ADDED EXTRA 318 ROWS TO THE TABLE, HENCE, I'M BEGINNING TO UPDATE THE NEWLY ADDED ROWS
+
 
 ```sql
 -- Updating the PRODUCTID column using 'WHERE, AND, and BETWEEN' conditions 
