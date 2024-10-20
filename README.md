@@ -1,11 +1,67 @@
 # SQL Database Creation Project
 
 ## Project Overview
-This project aims to create a database
 
+This project demonstrates the design, manipulation, and analysis of a sales database using SQL Server Management Studio (SSMS). The Customer database contains a key table titled Sales, which captures detailed information on sales transactions. The project demonstrates advanced SQL skills, including database creation, data manipulation, and in-depth analysis using a variety of SQL queries.
 
+## Database and Table Design
+The Sales table was designed to store vital information for sales transactions, allowing for detailed analysis across multiple dimensions. The table includes the following columns:
 
+- ID: Unique identifier for each transaction.
+- ProductCategory: The category of the product sold.
+- TransactionDate: Date of the transaction.
+- TransactionQuantity: Number of units sold in the transaction.
+- ProductID: Identifier for the product.
+- ProductType: Type or classification of the product.
+- UnitPrice: Price per unit of the product.
+- TransactionTime: The time when the transaction took place.
+- LocationName: Name of the location where the transaction occurred.
+- LocationID: Unique identifier for the location.
+- MonthName: Name of the month in which the transaction occurred.
+- DayName: Day of the week the transaction took place.
+- TotalSales: The total value of the transaction is calculated as TransactionQuantity * UnitPrice.
+Time of Day: The part of the day (morning, afternoon, evening) the transaction occurred, derived using a CASE statement.
 
+## SQL Queries Used During Table Creation
+During the creation of the Sales table, the following SQL queries were utilized:
+
+- CREATE: To create the table structure with the defined columns.
+- INSERT: For adding transactional data into the table.
+- WHERE: To filter data based on specific conditions.
+- AND: Used with the WHERE clause to apply multiple conditions.
+- BETWEEN: To select transactions within a specific date range or other numeric ranges.
+- ALTER: To modify the structure of the table by adding or removing columns.
+- DROP: Used to delete columns or tables when no longer needed.
+- DELETE: To remove specific records from the table.
+- UPDATE: To update existing records, such as adjusting prices or correcting data.
+- SET: Paired with UPDATE to set the new values for columns.
+- DATENAME and DATEPART: Functions used to extract the month name and day name from the TransactionDate for time-based analysis.
+- HOUR: Extracted the hour from the TransactionTime to help categorize transactions into specific times of the day.
+- CASE: Used to create the TimeofDay column, categorizing transactions based on the time (e.g., morning, afternoon, evening).
+
+## SQL Queries Used for Data Analysis
+After creating and populating the Sales table, the following queries were used for data analysis:
+
+- SUM: To calculate total sales revenue, total units sold, or other aggregated metrics.
+- ORDER BY: To sort results, such as sorting transactions by date, location, or sales amount.
+- GROUP BY: To aggregate data by different categories, such as total sales per product category, location, or time of day.
+- RANK: Used to rank products, locations, or categories based on total sales or transaction counts.
+- COUNT: To count the number of transactions, products sold, or occurrences of specific categories.
+- DISTINCT COUNT: To count unique occurrences, such as the number of unique customers, locations, or products sold.
+
+## Analytical Objectives
+The goal of this project was to perform detailed sales analysis, uncovering insights that can drive business decisions. The analysis focused on the following areas:
+
+1) Sales Performance by Product and Location: Identifying the best-performing products and locations by analyzing total sales and quantities sold.
+2) Time-Based Sales Trends: Using DATEPART, DATENAME, and TimeofDay to analyze sales trends by month, day of the week, and time of day, allowing the business to understand peak sales periods.
+3) Revenue and Ranking: Utilizing SUM and RANK functions to rank products, locations, and categories based on revenue generation.
+4) Transaction Analysis: Leveraging COUNT and DISTINCT COUNT to analyze the number of transactions, unique products sold, and unique customers.
+5) Filtering and Sorting Data: Using WHERE, ORDER BY, and BETWEEN to narrow down data for specific time ranges or locations, and organize the results meaningfully.
+
+## Tools and Technologies
+1) SQL Server Management Studio (SSMS): Used for database creation, manipulation, and querying.
+2) SQL: Various SQL queries were employed to manage data and perform the analysis, demonstrating versatility in handling large datasets.
+   
 ``` SQL
 -- Creating a new Database called "CUSTOMER"
 Create database Customer
@@ -594,5 +650,222 @@ Where ID Between 520 And 1046
 
 ```sql
 -- Final Outcome of the Table
-Select ID, ProductCategory, TransactionDate, TransactionQuantity, ProductID, ProductType, UnitPrice, TransactionTime, LocationName, LocationID, MonthName, DayName, TotalSales from Sales
+Select ID, ProductCategory, TransactionDate, TransactionQuantity, ProductID, ProductType, UnitPrice, TransactionTime, LocationName, LocationID, MonthName, DayName, TotalSales, TimeofDay from Sales
 ```
+
+```sql
+-- Calculating Total Sales
+Select sum(TotalSales) from Sales
+
+```sql
+-- Calculating TotalSales while formatting it with Dollar symbol
+Select FORMAT (sum(TotalSales), 'C0', 'en-US') AS TotalSales from Sales
+```
+
+```sql
+-- Calculating Transaction Quantity
+Select sum(TransactionQuantity) as TransactionQuantity  from Sales
+```
+
+```sql
+--Calculating number of Distinct ProductCategory
+Select count (distinct ProductCategory) as ProductCategory from Sales
+```
+
+```sql
+--Checking for the Names of Distinct ProductCategory
+Select distinct ProductCategory as ProductCategory from Sales
+```
+
+```sql
+--Calculating number of Distinct ProductType
+Select count (distinct ProductType) as ProductType from Sales
+```
+
+```sql
+--Checking for the Names of Distinct ProductType
+Select distinct ProductType as ProductType from Sales
+```
+
+```sql
+-- Updating the table by correcting a misspelling in one of the ProductTypes
+Update Sales
+Set ProductType = 'Pastry'
+where ProductType in ('Pastery', 'Patry', 'Patery')
+```
+
+```sql
+-- Adding TIMEOFDAY column to the table
+Alter Table Sales
+Add TimeofDay varchar (20)
+```
+
+```sql
+-- Extracting the TIMEOFDAY from the TransactionTime column
+Update Sales
+Set TimeOfDay = Case
+		When Datepart(Hour,TransactionTime) < 12  then 'Morning'
+		When DatePart(Hour, TransactionTime) < 16 then 'Afternoon'
+		Else 'Evening'
+		End as TIMEOFDAYY
+```
+
+```sql
+--Calculating number of LocationNames LocationName
+Select count (distinct LocationName) as	LocationName from Sales
+```
+
+```sql
+--Checking for the Names of Distinct LocationName
+Select distinct LocationName as LocationName from Sales
+```
+
+```sql
+--Calculating number of MonthName ProductType
+Select count (distinct MonthName) as MonthName from Sales
+```
+
+```sql
+--Checking for the Names of Distinct MonthNames
+Select distinct MonthName as MonthName from Sales
+```
+
+```sql
+--Calculating number of Distinct DayName ProductType
+Select count (distinct DayName) as DayName from Sales
+```
+
+```sql
+--Checking for the Names of Distinct DayNames
+Select distinct DayName as DayName from Sales
+```
+
+```sql
+-- Checking for the Store that made the highest Sales
+Select LocationName, sum(TotalSales) as TotalSales from Sales
+Where LocationName in ('Astoria', 'Lower Manhattan', 'Hells Kitchen')
+Group By LocationName
+Order by TotalSales desc
+```
+
+```sql
+-- Checking for which Month generated the highest Sales
+Select MonthName, sum(TotalSales) as TotalSales from Sales
+Where MonthName in ('January', 'February', 'March', 'April', 'May')
+Group By MonthName
+Order by TotalSales desc
+```
+
+```sql
+-- Checking for which ProductType generated the highest Sales using <> Operator
+Select ProductType, sum(TotalSales) as TotalSales from Sales
+Where ProductType <> 'Null'
+Group By ProductType
+Order by TotalSales desc
+```
+
+```sql
+-- Checking for which ProductType generated the highest Sales in each Store Location
+Select ProductType, LocationName, sum(TotalSales) as TotalSales from Sales
+Where LocationName in ( 'Astoria', 'Lower Manhattan', 'Hells Kitchen') 
+Group By ProductType, LocationName
+Order by ProductType, LocationName desc
+```
+
+```sql
+-- Checking for which ProductCategory generated the highest Sales in each Store Location
+Select ProductCategory, LocationName, sum(TotalSales) as TotalSales from Sales
+Where LocationName in ( 'Astoria', 'Lower Manhattan', 'Hells Kitchen') 
+Group By ProductCategory, LocationName
+Order by ProductCategory desc
+```
+
+```sql
+-- Calculating the ProductCtegory that generated the highest sales in each store location
+Select ProductCategory, LocationName, sum(TotalSales) as TotalSales, Rank() over (ORDER BY Sum(TotalSales) desc) as SalesRank from Sales
+Where LocationName in ( 'Astoria', 'Lower Manhattan', 'Hells Kitchen') 
+Group By ProductCategory, LocationName
+Order by LocationName desc
+```
+
+```sql
+-- Ranking the ProductCategories that generated the highest Sales
+Select ProductCategory, sum(TotalSales) as TotalSales,
+Rank() Over (Order by  Sum(TotalSales) desc) as SalesRank from Sales
+Group By ProductCategory
+Order By TotalSales Desc
+```
+
+```sql
+-- Ranking the ProductType that generated the highest Sales
+Select ProductType, sum(TotalSales) as TotalSales,
+Rank() Over (Order by  Sum(TotalSales) desc) as SalesRank from Sales
+Group By ProductType
+Order By TotalSales Desc
+```
+
+```sql
+-- Ranking the MonthName that generated the highest Sales
+Select MonthName, sum(TotalSales) as TotalSales,
+Rank() Over (Order by  Sum(TotalSales) desc) as SalesRank from Sales
+Group By MonthName
+Order By TotalSales Desc
+```
+
+```sql
+-- Ranking the DayName that generated the highest Sales
+Select DayName, sum(TotalSales) as TotalSales,
+Rank() Over (Order by  Sum(TotalSales) desc) as SalesRank from Sales
+Group By DayName
+Order By TotalSales Desc
+```
+
+```sql
+-- Ranking the TimeofDay that generated the highest Sales
+Select TimeofDay, sum(TotalSales) as TotalSales,
+Rank() Over (Order by  Sum(TotalSales) desc) as SalesRank from Sales
+Group By TimeofDay
+Order By TotalSales Desc
+```
+
+```sql
+-- Counting TransactionQuantity by LocationName
+Select LocationName, Sum(TransactionQuantity) TransactionQuantity, 
+Rank() Over (Order by  Sum(TransactionQuantity) desc) as SalesRank from Sales
+Group by LocationName
+Order by TransactionQuantity desc
+```
+
+```sql
+-- Counting TransactionQuantity by ProductCategory
+Select ProductCategory, Sum(TransactionQuantity) TransactionQuantity from Sales
+Group by ProductCategory
+Order by ProductCategory desc
+```
+
+```sql
+-- Counting TransactionQuantity by MonthName
+Select MonthName, Sum(TransactionQuantity) TransactionQuantity from Sales
+Group by MonthName
+Order by TransactionQuantity desc
+```
+
+```sql
+-- Counting TransactionQuantity by	DayName
+Select DayName, Sum(TransactionQuantity) TransactionQuantity from Sales
+Group by DayName
+Order by TransactionQuantity desc
+```
+
+```sql
+-- Counting TransactionQuantity by ProductType
+Select ProductType, Sum(TransactionQuantity) TransactionQuantity from Sales
+Group by ProductType
+Order by TransactionQuantity desc
+```
+
+## Conclusion
+This project highlights a comprehensive understanding of SQL for database management, data manipulation, and sales analysis. By creating a robust sales table and utilizing advanced SQL queries such as CASE, GROUP BY, ORDER BY, RANK, and SUM, meaningful insights were extracted from the data, providing actionable recommendations for improving business operations.
+
+
+
