@@ -20,7 +20,7 @@ The Sales table was designed to store vital information for sales transactions, 
 - MonthName: Name of the month in which the transaction occurred.
 - DayName: Day of the week the transaction took place.
 - TotalSales: The total value of the transaction is calculated as TransactionQuantity * UnitPrice.
-Time of Day: The part of the day (morning, afternoon, evening) the transaction occurred, derived using a CASE statement.
+- Time of Day: The part of the day (morning, afternoon, evening) the transaction occurred, derived using a CASE statement.
 
 ## SQL Queries Used During Table Creation
 During the creation of the Sales table, the following SQL queries were utilized:
