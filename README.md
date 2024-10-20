@@ -1,4 +1,4 @@
-# SQL Database Creation Project
+# SQL Database Creation and Analysis Project
 
 ## Project Overview
 
