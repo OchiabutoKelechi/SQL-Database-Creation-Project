@@ -1,7 +1,7 @@
 # SQL Database Creation and Analysis Project
 
 ## Project Overview
-This project demonstrates the design, creation, manipulation, and analysis of a multi-table sales database using SQL Server Management Studio (SSMS). The database, named Customer, contains three interconnected tables—Sales, Category, and Location; designed to store and manage transactional data, product categories, and store locations. This project highlights advanced SQL skills, including  database creation, multi-table queries, data manipulation, data aggregation, relationship management, and in-depth analysis using a variety of SQL queries to extract business insights from the data.
+This project demonstrates the design, creation, manipulation, and analysis of a multi-table sales database using SQL Server Management Studio (SSMS). The database, named Customer, contains three interconnected tables; Sales, Category, and Location; designed to store and manage transactional data, product categories, and store locations. This project highlights advanced SQL skills, including  database creation, multi-table queries, data manipulation, data aggregation, relationship management, and in-depth analysis using a variety of SQL queries to extract business insights from the data.
 
 ## Database and Table Design
 The project involved the design and creation of three main tables: Sales, Category, and Location. Each table serves a specific purpose within the database and allows for comprehensive analysis of sales data across products, locations, and categories.
