@@ -55,11 +55,13 @@ Select count (distinct DayName) as DayName from Sales
 --Checking for the Names of Distinct DayNames
 Select distinct DayName as DayName from Sales
 
--- Checking for the Store that made the highest Sales
-Select LocationName, sum(TotalSales) as TotalSales from Sales
-Where LocationName in ('Astoria', 'Lower Manhattan', 'Hells Kitchen')
-Group By LocationName
-Order by TotalSales desc
+-- Checking for the Store that made the highest Sales using JOIN
+Select l.LocationName, sum(s.TotalSales) TotalSales from Sales s
+Join Location l on l.LocationID = s.LocationID
+Where l.LocationName in ('Astoria', 'Lower Manhattan', 'Hells Kitchen')
+Group by l.LocationName
+Order  by l.LocationName
+
 
 -- Checking for which Month generated the highest Sales
 Select MonthName, sum(TotalSales) as TotalSales from Sales
@@ -73,7 +75,7 @@ Where ProductType <> 'Null'
 Group By ProductType
 Order by TotalSales desc
 
--- Checking for which ProductType generated the highest Sales in each Store Location
+-- Checking for which ProductType generated the highest Sales in each Store Location 
 Select ProductType, LocationName, sum(TotalSales) as TotalSales from Sales
 Where LocationName in ( 'Astoria', 'Lower Manhattan', 'Hells Kitchen') 
 Group By ProductType, LocationName
@@ -91,11 +93,13 @@ Where LocationName in ( 'Astoria', 'Lower Manhattan', 'Hells Kitchen')
 Group By ProductCategory, LocationName
 Order by LocationName desc
 
--- Ranking the ProductCategories that generated the highest Sales
-Select ProductCategory, sum(TotalSales) as TotalSales,
-Rank() Over (Order by  Sum(TotalSales) desc) as SalesRank from Sales
-Group By ProductCategory
-Order By TotalSales Desc
+-- Ranking the ProductCategories that generated the highest Sales using JOIN and RANK
+Select c.ProductCategory, sum(s.TotalSales) Sales, 
+Rank() Over (Order by Sum(TotalSales) Desc) as SalesRank from Sales s
+Join dbo.Category c on c.ProductID = s.ProductID
+where c.ProductCategory in ('Bakery', 'Coffee', 'Tea', 'Drinking Chocolate')
+Group by c.ProductCategory
+Order by Sales desc
 
 -- Ranking the ProductType that generated the highest Sales
 Select ProductType, sum(TotalSales) as TotalSales,
@@ -146,10 +150,6 @@ Order by TransactionQuantity desc
 Select ProductType, Sum(TransactionQuantity) TransactionQuantity from Sales
 Group by ProductType
 Order by TransactionQuantity desc
-
-
-Select ProductCategory, ProductType, TotalSales, LocationName, RANK() over (Partition by ProductCategory order by TotalSales desc) as Sales from Sales
-group by LocationName 
 
 select * from Sales
 
