@@ -1,12 +1,12 @@
 # SQL Database Creation and Analysis Project
 
 ## Project Overview
-
-This project demonstrates the design, manipulation, and analysis of a sales database using SQL Server Management Studio (SSMS). The Customer database contains a key table titled Sales, which captures detailed information on sales transactions. The project demonstrates advanced SQL skills, including database creation, data manipulation, and in-depth analysis using a variety of SQL queries.
+This project demonstrates the design, creation, manipulation, and analysis of a multi-table sales database using SQL Server Management Studio (SSMS). The database, named Customer, contains three interconnected tables—Sales, Category, and Location; designed to store and manage transactional data, product categories, and store locations. This project highlights advanced SQL skills, including  database creation, multi-table queries, data manipulation, data aggregation, relationship management, and in-depth analysis using a variety of SQL queries to extract business insights from the data.
 
 ## Database and Table Design
-The Sales table was designed to store vital information for sales transactions, allowing for detailed analysis across multiple dimensions. The table includes the following columns:
+The project involved the design and creation of three main tables: Sales, Category, and Location. Each table serves a specific purpose within the database and allows for comprehensive analysis of sales data across products, locations, and categories.
 
+#### 1) Sales Table:
 - ID: Unique identifier for each transaction.
 - ProductCategory: The category of the product sold.
 - TransactionDate: Date of the transaction.
@@ -22,45 +22,57 @@ The Sales table was designed to store vital information for sales transactions, 
 - TotalSales: The total value of the transaction is calculated as TransactionQuantity * UnitPrice.
 - Time of Day: The part of the day (morning, afternoon, evening) the transaction occurred, derived using a CASE statement.
 
-## SQL Queries Used During Table Creation
-During the creation of the Sales table, the following SQL queries were utilized:
+#### 2) Location Table:
+- LocationName: Name of the store or sales location.
+- LocationID: Unique identifier for the location, linked to the Sales table.
 
-- CREATE: To create the table structure with the defined columns.
-- INSERT: For adding transactional data into the table.
-- WHERE: To filter data based on specific conditions.
-- AND: Used with the WHERE clause to apply multiple conditions.
-- BETWEEN: To select transactions within a specific date range or other numeric ranges.
-- ALTER: To modify the structure of the table by adding or removing columns.
-- DROP: Used to delete columns or tables when no longer needed.
-- DELETE: To remove specific records from the table.
-- UPDATE: To update existing records, such as adjusting prices or correcting data.
-- SET: Paired with UPDATE to set the new values for columns.
-- DATENAME and DATEPART: Functions used to extract the month name and day name from the TransactionDate for time-based analysis.
-- HOUR: Extracted the hour from the TransactionTime to help categorize transactions into specific times of the day.
-- CASE: Used to create the TimeofDay column, categorizing transactions based on the time (e.g., morning, afternoon, evening).
+#### 3) Category Table:
+- ProductCategories: Name of the product category.
+- ProductID: Unique identifier for the product, linked to the Sales table.
+
+## SQL Queries Utilized for Table Creation and Data Management
+The following SQL queries were employed to design and manage the three tables:
+
+- CREATE: Used to define the structure of the Sales, Category, and Location tables, specifying column names and data types.
+- INSERT: Populated the tables with transactional, product, and location data.
+- WHERE: Applied to filter data based on specific conditions, such as selecting transactions within a certain date range or location.
+- AND: Combined multiple conditions in the WHERE clause for precise filtering.
+- BETWEEN: Extracted data within specific ranges, such as date ranges for sales transactions.
+- ALTER: Modified the table structure, such as adding or modifying columns during the table development process.
+- DROP: Removed unnecessary columns or tables as needed.
+- DELETE: Removed specific records from the tables, particularly when cleaning erroneous or irrelevant data.
+- UPDATE: Modified existing data, for instance, correcting product prices or adjusting transaction details.
+- SET: Used with UPDATE to assign new values to columns.
+- DATENAME and DATEPART: Extracted specific parts of the date, such as the month name and day of the week, from the TransactionDate.
+- HOUR: Extracted the hour from the TransactionTime for time-of-day analysis.
+- CASE: Used to create the TimeofDay column, categorizing transactions based on the time of the day i.e. (morning, afternoon, evening).
 
 ## SQL Queries Used for Data Analysis
-After creating and populating the Sales table, the following queries were used for data analysis:
+After creating the Sales, Category, and Location tables and populating them with data, advanced SQL queries were used to analyze sales trends and performance across locations and product categories. 
+The following queries were employed for data analysis:
 
-- SUM: To calculate total sales revenue, total units sold, or other aggregated metrics.
-- ORDER BY: To sort results, such as sorting transactions by date, location, or sales amount.
-- GROUP BY: To aggregate data by different categories, such as total sales per product category, location, or time of day.
+- SUM: To calculate total sales revenue, total units sold, or other aggregated metrics.\
+- JOIN: Utilized to combine data from the Sales, Location, and Category tables, allowing for comprehensive analysis of product categories and locations alongside transaction data.
+- ORDER BY: To sort data by different columns, such as total sales, transaction dates, or product categories.
+- GROUP BY: To aggregate data by categories, such as total sales per product category, location, or time of day.
 - RANK: Used to rank products, locations, or categories based on total sales or transaction counts.
 - COUNT: To count the number of transactions, products sold, or occurrences of specific categories.
 - DISTINCT COUNT: To count unique occurrences, such as the number of unique customers, locations, or products sold.
 
-## Analytical Objectives
-The goal of this project was to perform detailed sales analysis, uncovering insights that can drive business decisions. The analysis focused on the following areas:
 
-1) Sales Performance by Product and Location: Identifying the best-performing products and locations by analyzing total sales and quantities sold.
-2) Time-Based Sales Trends: Using DATEPART, DATENAME, and TimeofDay to analyze sales trends by month, day of the week, and time of day, allowing the business to understand peak sales periods.
-3) Revenue and Ranking: Utilizing SUM and RANK functions to rank products, locations, and categories based on revenue generation.
-4) Transaction Analysis: Leveraging COUNT and DISTINCT COUNT to analyze the number of transactions, unique products sold, and unique customers.
-5) Filtering and Sorting Data: Using WHERE, ORDER BY, and BETWEEN to narrow down data for specific time ranges or locations, and organize the results meaningfully.
+## Key Analytical Insights
+The main objectives of this project were to extract actionable insights regarding sales performance, location effectiveness, and product category trends. 
+The key insights derived from the analysis include:
+
+1) Sales Performance by Location and Product Category: Using SUM, JOIN, and GROUP BY, the analysis revealed which locations and product categories generated the highest sales. This data can be used for optimizing inventory and sales strategies.
+2) Time-Based Sales Trends: By leveraging DATENAME, DATEPART, and CASE, the analysis uncovered sales patterns based on the day of the week, month, and time of day, providing insights into peak sales periods. These insights are valuable for planning promotions, staffing, and resource allocation.
+3) Ranking of Locations and Products: With the RANK query, locations and products were ranked based on sales and transaction volume, allowing the identification of top-performing locations and best-selling products.
+4) Transaction Analysis: Using COUNT and DISTINCT COUNT, the total number of transactions was analyzed, along with unique products sold and unique locations with sales activity. This provided insights into the diversity of products and the geographic spread of sales.
 
 ## Tools and Technologies
-1) SQL Server Management Studio (SSMS): Used for database creation, manipulation, and querying.
-2) SQL: Various SQL queries were employed to manage data and perform the analysis, demonstrating versatility in handling large datasets.
+
+1) SQL Server Management Studio (SSMS): Used for database creation, manipulation, management, and querying.
+2) SQL Queries: A wide range of SQL queries was applied to manipulate and analyze the data, demonstrating proficiency in handling large and multi-table databases, and extracting meaningful business insights.
    
 ``` SQL
 -- Creating a new Database called "CUSTOMER"
@@ -73,7 +85,7 @@ Create database Customer
 Create table Sales
 (
 ProductCategory varchar (30),
-TransactionQuantity int ,
+TransactionQuantity int,
 ProductType varchar (30),
 UnitPrice int,
 TransactionDate date,
@@ -257,6 +269,47 @@ values ('Tea', 5, 'Brewed Chai Tea', 4, '02/07/2023', '7:12:15')
 
 Insert into Sales (ProductCategory, TransactionQuantity, ProductType, UnitPrice, TransactionDate, TransactionTime) 
 values ('Coffee', 3, 'Gourmet Brewed Coffe', 4, '2/6/2023', '12:06:11')
+```
+
+```sql
+-- Creating a new table called LOCATION
+
+Create Table Location
+(
+LocationName varchar (20),
+LocationID VARCHAR (20)
+)
+```
+
+```sql
+-- Inserting data into the LOCATION table
+
+Insert into Location (LocationName, LocationID) VALUES ('Astoria', 'L1')
+
+Insert into Location (LocationName, LocationID) VALUES ('Hells Kitchen', 'L3')
+
+Insert into Location (LocationName, LocationID) VALUES ('Lower Manhattan', 'L2')
+```
+
+```sql
+-- Creating new table called CATEGORY
+Create table Category
+(
+ProductCategory varchar (20),
+ProductID Varchar (20)
+)
+```
+
+```sql
+--- Insering data into the CATEGORY table
+
+Insert into Category (ProductCategory, ProductID) values ('Bakery', 'P1')
+
+Insert into Category (ProductCategory, ProductID) values ('Coffee', 'P2')
+
+Insert into Category (ProductCategory, ProductID) values ('Tea', 'P3')
+
+Insert into Category (ProductCategory, ProductID) values ('Drinking Chocolate', 'P4')
 ```
 
 ```sql
@@ -559,9 +612,7 @@ Set LocationID = 'L2'
 where LocationName = 'Lower Manhattan'
 ```
 
-```sql
-ADDED ADDITIONAL 527 COLUMNS TO THE TABLE*/
-```
+##### ADDED ADDITIONAL 527 ROWS TO THE TABLE
 
 ```sql
 -- Updating LOCATIONNAME column using WHERE, BETWEEN, and AND conditions-- 
@@ -749,11 +800,12 @@ Select distinct DayName as DayName from Sales
 ```
 
 ```sql
--- Checking for the Store that made the highest Sales
-Select LocationName, sum(TotalSales) as TotalSales from Sales
-Where LocationName in ('Astoria', 'Lower Manhattan', 'Hells Kitchen')
-Group By LocationName
-Order by TotalSales desc
+-- Checking for the Store that generated the highest Sales using JOIN query
+Select l.LocationName, sum(s.TotalSales) Sales from Sales s
+Join dbo.Location l on l.LocationID = s.LocationID
+Where l.LocationName in ('Astoria', 'Hells Kitchen', 'Lower Manhattan')
+Group by l.LocationName
+Order by Sales desc
 ```
 
 ```sql
@@ -781,11 +833,13 @@ Order by ProductType, LocationName desc
 ```
 
 ```sql
--- Checking for which ProductCategory generated the highest Sales in each Store Location
-Select ProductCategory, LocationName, sum(TotalSales) as TotalSales from Sales
-Where LocationName in ( 'Astoria', 'Lower Manhattan', 'Hells Kitchen') 
-Group By ProductCategory, LocationName
-Order by ProductCategory desc
+-- Calculating the ProductCategories that generated the highest Sales using JOIN and RANK
+Select c.ProductCategory, sum(s.TotalSales) Sales, 
+Rank() Over (Order by Sum(TotalSales) Desc) as SalesRank from Sales s
+Join dbo.Category c on c.ProductID = s.ProductID
+where c.ProductCategory in ('Bakery', 'Coffee', 'Tea', 'Drinking Chocolate')
+Group by c.ProductCategory
+Order by Sales desc
 ```
 
 ```sql
@@ -873,4 +927,4 @@ Order by TransactionQuantity desc
 ```
 
 ## Conclusion
-This project highlights a comprehensive understanding of SQL for database management, data manipulation, and sales analysis. By creating a robust sales table and utilizing advanced SQL queries such as CASE, GROUP BY, ORDER BY, RANK, and SUM, meaningful insights were extracted from the data, providing actionable recommendations for improving business operations.
+This project highlights the ability to design and manage a multi-table database and perform advanced data analysis using SQL. By integrating data from the Sales, Category, and Location tables and applying a variety of SQL queries—such as JOIN, GROUP BY, SUM, and RANK—the project successfully provides comprehensive insights into sales performance, product categories, and location effectiveness. These insights can be used to guide data-driven business decisions regarding inventory management, marketing strategies, and resource allocation to improve business operations.
