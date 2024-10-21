@@ -612,7 +612,7 @@ Set LocationID = 'L2'
 where LocationName = 'Lower Manhattan'
 ```
 
-##### ADDED ADDITIONAL 527 ROWS TO THE TABLE
+##### ADDED EXTRA 527 ROWS TO THE TABLE
 
 ```sql
 -- Updating LOCATIONNAME column using WHERE, BETWEEN, and AND conditions-- 
