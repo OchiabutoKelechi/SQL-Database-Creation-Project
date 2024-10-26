@@ -51,7 +51,7 @@ The following SQL queries were employed to design and manage the three tables:
 After creating the Sales, Category, and Location tables and populating them with data, advanced SQL queries were used to analyze sales trends and performance across locations and product categories. 
 The following queries were employed for data analysis:
 
-- SUM: To calculate total sales revenue, total units sold, or other aggregated metrics.\
+- SUM: To calculate total sales revenue, total units sold, or other aggregated metrics.
 - JOIN: Utilized to combine data from the Sales, Location, and Category tables, allowing for comprehensive analysis of product categories and locations alongside transaction data.
 - ORDER BY: To sort data by different columns, such as total sales, transaction dates, or product categories.
 - GROUP BY: To aggregate data by categories, such as total sales per product category, location, or time of day.
