@@ -843,7 +843,7 @@ Order by Sales desc
 ```
 
 ```sql
--- Calculating the ProductCtegory that generated the highest sales in each store location
+-- Calculating the ProductCategory that generated the highest sales in each store location
 Select ProductCategory, LocationName, sum(TotalSales) as TotalSales, Rank() over (ORDER BY Sum(TotalSales) desc) as SalesRank from Sales
 Where LocationName in ( 'Astoria', 'Lower Manhattan', 'Hells Kitchen') 
 Group By ProductCategory, LocationName
