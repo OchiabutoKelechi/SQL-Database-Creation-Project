@@ -725,6 +725,7 @@ Select ID, ProductCategory, TransactionDate, TransactionQuantity, ProductID, Pro
 ```sql
 -- Calculating Total Sales
 Select sum(TotalSales) from Sales
+```
 
 ```sql
 -- Calculating TotalSales while formatting it with Dollar symbol
